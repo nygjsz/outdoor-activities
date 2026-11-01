@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 01, 2026 at 02:29 AM
+-- Generation Time: Nov 01, 2026 at 08:46 AM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.36
 
@@ -45,10 +45,10 @@ CREATE TABLE `activities` (
 --
 
 INSERT INTO `activities` (`code`, `name`, `location`, `description`, `price`, `activity_date`, `difficulty`, `guide_id`, `created_at`, `updated_at`) VALUES
-('A001', 'Mount Kinabalu Hike', 'Sabah', 'Two-day guided climb..', 450.00, '2026-12-05', 'Hard', 'G001', '2026-10-25 21:44:52', '2026-10-25 22:20:23'),
+('A001', 'Mount Kinabalu Hike', 'Sabah', 'Two-day guided climbing', 450.00, '2026-12-05', 'Hard', 'G001', '2026-10-25 21:44:52', '2026-10-31 22:50:39'),
 ('A002', 'River Kayaking', 'Pahang', 'Half-day kayak on the river.', 120.00, '2026-12-12', 'Easy', 'G002', '2026-10-25 21:44:52', '2026-10-25 21:44:52'),
 ('A003', 'Camping at Gunung Datuk', 'Negeri Sembilan', 'Overnight camping.', 80.00, '2026-12-20', 'Moderate', 'G003', '2026-10-25 21:44:52', '2026-10-25 21:44:52'),
-('A004', 'Waterfall Trekking at Sungai Gabai', 'Selangor', 'Guided jungle trek to a series of waterfalls with a swim stop.', 95.00, '2027-01-09', 'Moderate', 'G005', '2026-10-27 08:29:42', '2026-10-27 08:29:42');
+('A005', 'ATV Jungle Adventure at Hulu Langat', 'Selangor', 'Experience an exciting off-road ride through the muddy trails and lush rainforests of Hulu Langat, guided by professionals.', 160.00, '2027-01-11', 'Hard', 'G004', '2026-11-01 00:27:26', '2026-11-01 00:29:23');
 
 -- --------------------------------------------------------
 
@@ -74,7 +74,7 @@ CREATE TABLE `bookings` (
 INSERT INTO `bookings` (`id`, `user_id`, `activity_code`, `participants`, `safety_notes`, `status`, `created_at`, `updated_at`) VALUES
 (1, 2, 'A001', 1, NULL, 'confirmed', '2026-10-25 23:31:30', '2026-10-31 10:27:44'),
 (2, 3, 'A002', 2, 'we dont have experience', 'confirmed', '2026-10-26 00:26:34', '2026-10-27 06:30:47'),
-(3, 2, 'A004', 2, NULL, 'confirmed', '2026-10-31 10:28:10', '2026-10-31 10:50:29');
+(5, 2, 'A002', 3, NULL, 'confirmed', '2026-11-01 00:19:01', '2026-11-01 00:30:53');
 
 -- --------------------------------------------------------
 
@@ -120,8 +120,7 @@ CREATE TABLE `contact_messages` (
 --
 
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `message`, `created_at`, `updated_at`) VALUES
-(1, 'ali ahmad', 'aliahmad@gmail.com', 'add more activities', '2026-10-27 08:15:29', '2026-10-27 08:15:29'),
-(2, 'ali ahmad', 'aliahmad@gmail.com', 'please accept my booking', '2026-10-31 10:29:17', '2026-10-31 10:29:17');
+(4, 'ali ahmad', 'aliahmad@gmail.com', 'pls add more activity!', '2026-11-01 00:21:22', '2026-11-01 00:21:22');
 
 -- --------------------------------------------------------
 
@@ -163,7 +162,7 @@ INSERT INTO `guides` (`guide_id`, `name`, `phone`, `experience_years`, `created_
 ('G002', 'Aiman', '013-9876543', 3, '2026-10-25 21:44:52', '2026-10-25 21:44:52'),
 ('G003', 'Aisyah', '013-9876543', 6, '2026-10-25 21:44:52', '2026-10-25 21:44:52'),
 ('G004', 'Faizal', '016-8725843', 4, '2026-10-31 10:51:12', '2026-10-31 10:51:12'),
-('G005', 'Eliesya', '0145687523', 3, '2026-10-26 00:51:18', '2026-10-26 00:51:18');
+('G005', 'Eliesya', '015-6543215', 4, '2026-11-01 00:32:25', '2026-11-01 00:33:09');
 
 -- --------------------------------------------------------
 
@@ -258,8 +257,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('dXAwCcxlwkYRqeK377htbQTczjZDi8ytKIVClNpj', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'eyJfdG9rZW4iOiIxUGpZT25BSXB5dEV3NE1yTHpoaGJmdWZmRFZLVWJLeHlVQVRHNlJaIiwidXJsIjp7ImludGVuZGVkIjoiaHR0cDpcL1wvMTI3LjAuMC4xOjgwMDBcL2FjdGl2aXRpZXMifSwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvMTI3LjAuMC4xOjgwMDBcL2xvZ2luIiwicm91dGUiOiJsb2dpbiJ9fQ==', 1793469071),
-('jPT4IwB4JdPwnvVAbxKKqNHyMHnxjlCLfPTaHhCu', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'eyJfdG9rZW4iOiJmejI2eGRKUVRDUFppUElPMmdmbVVvRHIxc01PdzJPdTNNbDBhWHFGIiwiX2ZsYXNoIjp7Im5ldyI6W10sIm9sZCI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvMTI3LjAuMC4xOjgwMDBcL21lc3NhZ2VzIiwicm91dGUiOiJtZXNzYWdlcy5pbmRleCJ9LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6MSwicGFzc3dvcmRfaGFzaF93ZWIiOiIyYWUzYWQwNDM4MWMzODhhZWFjYjdiZWU2YWM3NDBlYWJkZjEyMjMwZDA1Njc0ZTFiYmExYjU3YjBkNTI0OWZjIn0=', 1793472685);
+('qFvxAiC4Ny42KRhEIHhxksujOXNRaYdv4kuvUNT0', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'eyJfdG9rZW4iOiJSNHZldTJPV0tURElrWTdHeEd1OFhaRHNuMWFBa203dFhDTVlRZkNSIiwiX2ZsYXNoIjp7Im5ldyI6W10sIm9sZCI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvMTI3LjAuMC4xOjgwMDBcL21lc3NhZ2VzIiwicm91dGUiOiJtZXNzYWdlcy5pbmRleCJ9LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6MSwicGFzc3dvcmRfaGFzaF93ZWIiOiIyYWUzYWQwNDM4MWMzODhhZWFjYjdiZWU2YWM3NDBlYWJkZjEyMjMwZDA1Njc0ZTFiYmExYjU3YjBkNTI0OWZjIn0=', 1793522027),
+('snkRHmDJIzzLJNeHz5yvP1Peumq6ilI7wIZ59uLN', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'eyJfdG9rZW4iOiJtZG9nME5SSUE2RFpkYVBqVFZpdFNZRGJ5bXdiY2F4dmlScHA3blRVIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cLzEyNy4wLjAuMTo4MDAwXC9sb2dpbiIsInJvdXRlIjoibG9naW4ifSwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119fQ==', 1793519059);
 
 -- --------------------------------------------------------
 
@@ -389,13 +388,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
