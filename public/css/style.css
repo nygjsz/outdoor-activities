@@ -1,139 +1,235 @@
+
+
 /* ===== General page ===== */
 body {
-    font-family: Arial, sans-serif;
-    background: #f7f2ec;          /* cream background */
+    font-family: Barlow, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #efe8d8;                /* cream text */
+    background-color: #12201d;     /* dark green background */
     margin: 0;
 }
 
-/* ===== Banner at the top ===== */
-.adv {
-    position: relative;
-    height: 300px;
-    overflow: hidden;
+a {
+    color: #ff6b1a;
 }
 
-.adv img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;            /* crop the photo to fit the banner */
-    object-position: center 60%;  /* move the photo up or down */
-    display: block;
+/* ===== Headings ===== */
+h1, h2, h3 {
+    font-family: "Big Shoulders Display", Arial, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;     /* make the headings BIG LETTERS */
+    line-height: 1;
+    margin-top: 0;
 }
 
-.adv-text {
-    position: absolute;           /* put the text on top of the photo */
-    top: 50%;
-    right: 8%;
-    transform: translateY(-50%);
-    text-align: right;
-    color: #3b2410;
+h1 {
+    font-size: 4rem;
+    color: #efe8d8;
 }
 
-.adv-text h2 {
-    margin: 0;
-    font-size: 2.2rem;
-    color: #3b2410;
+h2 {
+    font-size: 2.4rem;
+    color: #efe8d8;
+    margin-top: 40px;
 }
 
-.adv-text p {
-    margin: 6px 0 0;
-    font-size: 1.1rem;
+h3 {
+    font-size: 1.7rem;
+    margin-bottom: 6px;
 }
 
 /* ===== Navigation bar ===== */
 nav {
-    background: #3e2418;          /* dark chocolate */
-    padding: 12px 16px;
-    display: flex;                /* put the links in one row */
+    position: sticky;              /* the menu stays at the top when you scroll */
+    top: 0;
+    z-index: 10;
+    background: #12201d;
+    border-bottom: 3px solid #ff6b1a;   /* orange line under the menu */
+    padding: 12px 24px;
+    display: flex;                 /* put the links in one row */
     align-items: center;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 8px 22px;
 }
 
 nav a {
-    color: white;
+    color: #efe8d8;
     text-decoration: none;
     font-weight: bold;
 }
 
 nav a:hover {
-    color: #e0a458;               /* caramel when the mouse is over it */
+    color: #ff6b1a;                /* orange when the mouse is over it */
+}
+
+.brand {
+    font-family: "Big Shoulders Display", Arial, sans-serif;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+
+.brand span {
+    color: #ff6b1a;                /* the & sign is orange */
+}
+
+.nav-user {
+    margin-left: auto;             /* push this to the right side */
+    color: #a9b5ad;
+}
+
+.nav-end {
+    margin-left: auto;
 }
 
 .search {
     display: flex;
-    gap: 4px;
+    gap: 6px;
 }
 
 nav input {
-    width: 160px;
+    width: 150px;
     margin: 0;
 }
 
-nav button {
-    background: #e0a458;
-    color: #3e2418;
+/* ===== Big photo on the home page ===== */
+.hero {
+    position: relative;
+    height: 620px;
+    overflow: hidden;
 }
 
-/* ===== Main content (white box) ===== */
+.hero img {
+    position: absolute;            /* the photo fills the whole box */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;             /* crop the photo to fit */
+    object-position: 20% 70%;      /* move the photo down so the whole hiker stays visible */
+}
+
+/* dark fade at the bottom of the photo */
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(transparent, #12201d);
+}
+
+.hero-text {
+    position: absolute;            /* put the words on top of the photo */
+    top: 90px;
+    right: 7%;
+    width: 480px;
+    color: #12201d;                /* dark words on the bright sky */
+}
+
+.hero-text h1 {
+    color: #12201d;
+    font-size: 6rem;
+    line-height: 0.9;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.hero .btn {
+    background: #12201d;
+    color: #efe8d8;
+    padding: 12px 22px;
+}
+
+.hero .btn:hover {
+    background: #ff6b1a;
+    color: #12201d;
+}
+
+/* ===== Main content ===== */
 .content {
-    background: white;
     max-width: 1100px;
-    min-height: 300px;
-    margin: 30px auto;            /* centre the box */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    min-height: 400px;
+    margin: 0 auto;                /* centre the box */
+    padding: 40px 24px;
 }
 
-h1 {
-    color: #3e2418;
-}
-
-h2 {
-    color: #5f3920;
+.first {
+    margin-top: 0;                 /* no gap above the first heading */
 }
 
 /* ===== Tables ===== */
 table {
     border-collapse: collapse;
     width: 100%;
+    background: #1b2d29;
 }
 
 th {
-    background: #3e2418;
-    color: white;
-    padding: 10px;
+    background: #0c1614;
+    color: #a9b5ad;
+    padding: 12px;
     text-align: left;
 }
 
 td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 12px;
+    border-bottom: 1px solid #2b413b;
+}
+
+td:last-child {
+    white-space: nowrap;           /* keep View / Edit / Delete on one row */
+}
+
+td .btn, td button {
+    margin: 3px 3px 3px 0;         /* small gap between the buttons */
 }
 
 tr:hover {
-    background: #f4e9de;          /* highlight the row under the mouse */
+    background: #2b413b;           /* highlight the row under the mouse */
 }
 
 /* ===== Buttons ===== */
 button, .btn {
-    background: #7b4a2a;          /* milk chocolate */
-    color: white;
+    background: #ff6b1a;           /* orange */
+    color: #1a0d03;
     border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
+    padding: 9px 16px;
+    border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 button:hover, .btn:hover {
-    background: #5f3920;
+    background: #ff8a45;
 }
 
 .btn-danger {
-    background: #c0392b;          /* red for delete */
+    background: transparent;       /* red outline for delete */
+    color: #ff5a4a;
+    border: 2px solid #ff5a4a;
+}
+
+.btn-danger:hover {
+    background: #ff5a4a;
+    color: #1a0503;
+}
+
+.btn-ghost {
+    background: transparent;       /* grey outline for Back */
+    color: #efe8d8;
+    border: 2px solid #a9b5ad;
+}
+
+.btn-ghost:hover {
+    background: #efe8d8;
+    color: #12201d;
 }
 
 .inline {
@@ -142,51 +238,183 @@ button:hover, .btn:hover {
 
 /* ===== Forms ===== */
 input, select, textarea {
-    width: 300px;
+    width: 360px;
     max-width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    padding: 10px;
+    margin-top: 6px;
+    background: #0c1614;
+    color: #efe8d8;
+    border: 1px solid #2b413b;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+textarea {
+    width: 520px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #ff6b1a;         /* orange border when you click inside */
+    outline: none;
+}
+
+/* ===== Difficulty and status labels ===== */
+.level, .status {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 2px solid #a9b5ad;
+    color: #a9b5ad;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.level-easy, .status-confirmed {
+    color: #9bc47a;                /* green */
+    border-color: #9bc47a;
+}
+
+.level-moderate, .status-pending {
+    color: #f2b441;                /* yellow */
+    border-color: #f2b441;
+}
+
+.level-hard, .status-cancelled {
+    color: #ff5a4a;                /* red */
+    border-color: #ff5a4a;
 }
 
 /* ===== Cards on the home page ===== */
 .cards {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
 .card {
-    background: white;
-    border: 1px solid #ddd;
-    border-top: 4px solid #7b4a2a;
-    border-radius: 8px;
-    padding: 16px;
+    background: #1b2d29;
+    border: 1px solid #2b413b;
+    border-left: 5px solid #ff6b1a;      /* orange stripe on the left */
+    border-radius: 4px;
+    padding: 20px;
     width: 260px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card p {
+    margin: 0 0 4px;
+    color: #a9b5ad;
+}
+
+.card-foot {
+    display: flex;
+    justify-content: space-between;      /* price on the left, button on the right */
+    align-items: center;
+    margin-top: 18px;
+}
+
+.price {
+    font-family: "Big Shoulders Display", Arial, sans-serif;
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #ff6b1a;
+}
+
+/* ===== Details on the single activity page ===== */
+.facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 0 28px;
+}
+
+.facts div {
+    background: #1b2d29;
+    border: 1px solid #2b413b;
+    border-radius: 4px;
+    padding: 12px 18px;
+    min-width: 150px;
+}
+
+.facts dt {
+    color: #a9b5ad;
+    font-size: 14px;
+}
+
+.facts dd {
+    margin: 2px 0 0;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 /* ===== Messages ===== */
 .success {
-    background: #d4edda;
-    color: #155724;
-    padding: 10px;
-    border-radius: 6px;
+    background: #24382d;
+    color: #9bc47a;
+    padding: 12px 16px;
+    border-left: 4px solid #9bc47a;
+    border-radius: 4px;
 }
 
 .error-list {
-    background: #fdecea;
-    color: #b3261e;
-    padding: 10px 10px 10px 30px;
-    border-radius: 6px;
+    background: #3a2623;
+    color: #ff9a8f;
+    padding: 12px 12px 12px 36px;
+    border-left: 4px solid #ff5a4a;
+    border-radius: 4px;
 }
 
 /* ===== Footer ===== */
 footer {
-    background: #3e2418;
-    color: white;
+    background: #0c1614;
+    color: #a9b5ad;
     text-align: center;
-    padding: 16px;
-    margin-top: 30px;
+    padding: 18px;
+    border-top: 1px solid #2b413b;
+}
+
+/* ===== Phone screens (smaller than 800px) ===== */
+@media (max-width: 800px) {
+    .hero {
+        height: auto;
+    }
+
+    .hero::after {
+        display: none;
+    }
+
+    .hero img {
+        position: static;          /* photo goes on top, words go below it */
+        height: 300px;
+        display: block;
+    }
+
+    .hero-text {
+        position: static;
+        width: auto;
+        padding: 24px;
+        color: #efe8d8;
+    }
+
+    .hero-text h1 {
+        color: #efe8d8;
+        font-size: 3.5rem;
+    }
+
+    .hero .btn {
+        background: #ff6b1a;
+        color: #1a0d03;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .nav-user, .nav-end {
+        margin-left: 0;
+    }
+
+    table {
+        display: block;            /* let wide tables scroll sideways */
+        overflow-x: auto;
+    }
 }

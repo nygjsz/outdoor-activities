@@ -20,7 +20,7 @@
                         <td>{{ $activity->location }}</td>
                         <td>{{ $activity->activity_date }}</td>
                         <td>{{ $activity->price }}</td>
-                        <td>{{ $activity->difficulty }}</td>
+                        <td><span class="level level-{{ strtolower($activity->difficulty) }}">{{ $activity->difficulty }}</span></td>
                         <td>{{ $activity->guide->name ?? 'Not assigned' }}</td>
                         <td>
                             <a class="btn" href="{{ route('activities.show', $activity) }}">View</a>

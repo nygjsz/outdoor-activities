@@ -31,11 +31,11 @@
                     <td>{{ $booking->participants }}</td>
                     <td>{{ number_format($booking->participants * $booking->activity->price, 2) }}</td>
                     <td>{{ $booking->safety_notes ?? '-' }}</td>
-                    <td>{{ ucfirst($booking->status) }}</td>
+                    <td><span class="status status-{{ strtolower($booking->status) }}">{{ ucfirst($booking->status) }}</span></td>
                     <td>
                         <a class="btn" href="{{ route('bookings.edit', $booking) }}">Edit</a>
                         <form action="{{ route('bookings.destroy', $booking) }}" method="POST"
-                              class="inline" onsubmit="return confirm('Delete this booking?')">
+                            class="inline" onsubmit="return confirm('Delete this booking?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn-danger">Delete</button>

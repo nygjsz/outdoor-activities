@@ -1,12 +1,16 @@
 @extends('layout.app')
 @section('content')
     <h1>{{ $activity->name }}</h1>
-    <p><strong>Code:</strong> {{ $activity->code }}</p>
-    <p><strong>Location:</strong> {{ $activity->location }}</p>
-    <p><strong>Date:</strong> {{ $activity->activity_date }}</p>
-    <p><strong>Price:</strong> RM{{ $activity->price }}</p>
-    <p><strong>Difficulty:</strong> {{ $activity->difficulty }}</p>
-    <p><strong>Guide:</strong> {{ $activity->guide->name ?? 'Not assigned' }}</p>
+
+    <dl class="facts">
+        <div><dt>Code</dt><dd>{{ $activity->code }}</dd></div>
+        <div><dt>Location</dt><dd>{{ $activity->location }}</dd></div>
+        <div><dt>Date</dt><dd>{{ $activity->activity_date }}</dd></div>
+        <div><dt>Price</dt><dd class="price">RM{{ $activity->price }}</dd></div>
+        <div><dt>Difficulty</dt><dd><span class="level level-{{ strtolower($activity->difficulty) }}">{{ $activity->difficulty }}</span></dd></div>
+        <div><dt>Guide</dt><dd>{{ $activity->guide->name ?? 'Not assigned' }}</dd></div>
+    </dl>
+
     <p>{{ $activity->description }}</p>
 
     @auth
@@ -15,5 +19,5 @@
         <a class="btn" href="{{ route('login') }}">Login to book</a>
     @endauth
 
-    <a class="btn" href="{{ route('activities.index') }}">Back</a>
+    <a class="btn btn-ghost" href="{{ route('activities.index') }}">Back</a>
 @endsection
