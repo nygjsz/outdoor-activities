@@ -1,58 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Adventure & Outdoor Activities
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel web application for managing outdoor adventure activities (hiking, kayaking, camping and more). Customers can browse activities and make bookings. The admin manages activities, guides, bookings and contact messages.
 
-## About Laravel
+Course: CSC1413 Final Project (Session 2, 2026)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 1. Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Everyone (no login)**
+- Browse and search activities (by name, location or code)
+- View activity details
+- Register and log in
+- Send a message through the Contact form
 
-## Learning Laravel
+**Customer (logged in)**
+- Book an activity (number of participants and safety notes)
+- View, edit and delete their own bookings
+- Cannot see or change other users' bookings
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Admin**
+- Add, edit and delete activities
+- Add, edit, delete and search guides
+- View all bookings and change the booking status (pending, confirmed, cancelled)
+- Read contact messages
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Other**
+- Two user levels (admin and user) using a `role` column and an `admin` middleware
+- Client-side validation with JavaScript, and server-side validation in the controllers
+- CSRF protection on every form
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 2. Technology
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+| Part | Used |
+|---|---|
+| Framework | Laravel (PHP 8.3) |
+| Database | MySQL |
+| Templates | Blade |
+| Styling | Plain CSS (`public/css/style.css`) |
+| Local server | Laragon |
+| Version control | Git and GitHub |
 
-```bash
-composer require laravel/boost --dev
+---
 
-php artisan boost:install
+## 3. How to run the project
+
+Requirements: PHP 8.2 or newer, Composer, MySQL (Laragon includes all of these).
+
+1. Open a terminal in the project folder and install the packages:
+   ```
+   composer install
+   ```
+2. Copy the settings file and create the app key:
+   ```
+   copy .env.example .env
+   php artisan key:generate
+   ```
+3. In phpMyAdmin (or HeidiSQL), create an empty database named `adventure_db`.
+4. Open `.env` and set the database:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=adventure_db
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+5. Create the tables and the sample data:
+   ```
+   php artisan migrate --seed
+   ```
+   (Alternatively, import `database/adventure_db.sql` in phpMyAdmin.)
+6. Start the server:
+   ```
+   php artisan serve
+   ```
+7. Open `http://127.0.0.1:8000/home`.
+
+### Login accounts
+
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@outdoor.activity` | `admin123` |
+| Customer | Register a new account on the Register page | (your own) |
+
+---
+
+## 4. Database design
+
+| Table | Purpose | Key columns |
+|---|---|---|
+| `users` | Accounts for admin and customers | `id`, `name`, `email`, `password`, `role` |
+| `guides` | Guides who lead activities | `guide_id` (primary key), `name`, `phone`, `experience_years` |
+| `activities` | Activities offered | `code` (primary key), `name`, `location`, `price`, `activity_date`, `difficulty`, `guide_id` |
+| `bookings` | A customer booking an activity | `id`, `user_id`, `activity_code`, `participants`, `safety_notes`, `status` |
+| `contact_messages` | Messages from the Contact form | `id`, `name`, `email`, `message` |
+
+**Relationships**
+- One guide has many activities (`activities.guide_id` refers to `guides.guide_id`)
+- One user has many bookings (`bookings.user_id` refers to `users.id`)
+- One activity has many bookings (`bookings.activity_code` refers to `activities.code`)
+
+---
+
+## 5. Routes
+
+| Access | URL | Purpose |
+|---|---|---|
+| Public | `/home` | Home page with upcoming activities |
+| Public | `/activities` | List and search activities |
+| Public | `/activities/{code}` | Activity details |
+| Public | `/contact` | Contact form (GET shows, POST saves) |
+| Guests | `/login`, `/register` | Sign in and sign up |
+| Logged in | `/logout` | Sign out |
+| Logged in | `/bookings` (index, create, edit, update, destroy) | Bookings (customers see only their own) |
+| Admin | `/activities/create`, `/activities/{code}/edit` and delete | Manage activities |
+| Admin | `/guides` (index, create, edit, update, destroy) | Manage guides |
+| Admin | `/messages` | Read contact messages |
+
+Run `php artisan route:list` to see every route.
+
+---
+
+## 6. Project structure (main files)
+
+```
+app/
+  Http/Controllers/
+    ActivityController.php   activities CRUD and search
+    BookingController.php    bookings CRUD (own bookings for customers)
+    GuideController.php      guides CRUD and search (admin)
+    AuthController.php       register, login, logout
+    ContactController.php    contact form and messages
+    PageController.php       home page
+  Http/Middleware/
+    AdminMiddleware.php      blocks non-admin users (403)
+  Models/                    User, Guide, Activity, Booking, ContactMessage
+database/
+  migrations/                table definitions
+  seeders/DatabaseSeeder.php admin account and sample data
+resources/views/
+  layout/app.blade.php       shared layout (banner, navigation, footer)
+  activities/ bookings/ guides/ messages/ auth/   page templates
+routes/web.php               all routes
+public/css/style.css         stylesheet
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 7. Testing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+The functions were tested manually. The test cases, expected results and outcomes are in the testing table of the report (login, validation, CRUD, role protection and the contact form).
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 8. Version control
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Source code is kept in Git and pushed to GitHub: https://github.com/nygjsz/outdoor-activities
